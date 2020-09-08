@@ -6,4 +6,5 @@
     <string name="text_label_2">Skill IQ Leaders</string>
     <string name="learningTime">learning hours,</string>
     <string name="learningCountry">Country</string>
+    <string name="learningSkill">skill IQ Score</string>
 </resources>

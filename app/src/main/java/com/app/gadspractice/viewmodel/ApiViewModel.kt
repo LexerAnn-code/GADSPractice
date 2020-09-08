@@ -45,13 +45,21 @@ class ApiViewModel(
         fetchData()
 
     }
+     fun AoadSkills():LiveData<MutableList<SkillsApiResponse>>{
+        viewModelScope.launch {
+            _loadingState.value = LoadingState.LOADING
+            _allSkillLeaders.postValue(apiRepository.getAllSkillLearners())
+            _loadingState.value = LoadingState.LOADED
+        }
+        return  allSkillLeaders
+    }
 
     private fun fetchData() {
         viewModelScope.launch {
             try {
                 _loadingState.value = LoadingState.LOADING
                 _allLearningLeaders.postValue(apiRepository.getAllLeadersLearners())
-                _allSkillLeaders.postValue(apiRepository.getAllSkillLearners())
+
                 _loadingState.value = LoadingState.LOADED
                 debugger("Reading")
             } catch (e: Exception) {

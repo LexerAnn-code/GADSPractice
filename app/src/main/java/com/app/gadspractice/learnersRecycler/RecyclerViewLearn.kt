@@ -13,10 +13,19 @@ DIF_UTIL) {
         private val DIF_UTIL:DiffUtil.ItemCallback<LeadersApiResponse> =
             object:DiffUtil.ItemCallback<LeadersApiResponse>(){
                 override fun areItemsTheSame(
-                    oldItem: LeadersApiResponse, newItem: LeadersApiResponse ): Boolean =oldItem.name==newItem.name
+                    oldItem: LeadersApiResponse,
+                    newItem: LeadersApiResponse
+                ): Boolean {
+                    return oldItem.name==newItem.name
+                }
+
                 override fun areContentsTheSame(
-                    oldItem: LeadersApiResponse, newItem: LeadersApiResponse
-                ): Boolean =oldItem.hours==newItem.hours
+                    oldItem: LeadersApiResponse,
+                    newItem: LeadersApiResponse
+                ): Boolean {
+                    return oldItem==newItem
+                }
+
             }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderLearn {

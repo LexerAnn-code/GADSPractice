@@ -9,7 +9,7 @@ interface GadsApi {
  @GET("/api/hours")
   fun getLearningLeaders():Deferred<MutableList<LeadersApiResponse>>
 @GET(" /api/skilliq")
-suspend fun  getAllTopSkill():Deferred<MutableList<SkillsApiResponse>>
+ fun  getAllTopSkill():Deferred<MutableList<SkillsApiResponse>>
 
 
 }
