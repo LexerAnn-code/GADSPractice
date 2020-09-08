@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GADSPractice</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_label_1">Learning Leaders</string>
+    <string name="text_label_2">Skill IQ Leaders</string>
+    <string name="learningTime">learning hours,</string>
+    <string name="learningCountry">Country</string>
 </resources>

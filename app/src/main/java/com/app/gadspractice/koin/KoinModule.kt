@@ -1,10 +1,12 @@
-package com.app.gadspractice.Koin
+package com.app.gadspractice.koin
 
 import android.app.Application
 import android.content.Context
-import com.app.gadspractice.Network.GadsApi
-import com.app.gadspractice.Repository.ApiRepository
-import com.app.gadspractice.ViewModel.ApiViewModel
+import com.app.gadspractice.network.GadsApi
+import com.app.gadspractice.network.GadsSubmitApi
+import com.app.gadspractice.repository.ApiRepository
+import com.app.gadspractice.repository.RepositorySubmit
+import com.app.gadspractice.viewmodel.ApiViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -19,15 +21,38 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule= module {
     viewModel {
-        ApiViewModel(get())
+        ApiViewModel(get(), get())
     }
 }
 
-val retrofitServiceModule = module {
-fun provideRetrofitService(retrofit: Retrofit):GadsApi{
-    return retrofit.create(GadsApi::class.java)
+val repositoryModuleSubmit= module {
+    fun provideRetrofitServiceSubmit(retrofit: Retrofit): GadsSubmitApi {
+        return retrofit.create(GadsSubmitApi::class.java)
+
+    }
+    single { provideRetrofitServiceSubmit(get()) }
 }
-    single { provideRetrofitService(get()) }
+
+val repositoryModules= module {
+    fun provideRetrofitServiceSubmit(retrofit: Retrofit): GadsApi {
+        return retrofit.create(GadsApi::class.java)
+
+    }
+    single { provideRetrofitServiceSubmit(get()) }
+}
+val repositoryModuleApiRepository= module {
+    fun provideUserRepository(api: GadsApi): ApiRepository {
+        return ApiRepository(api)
+    }
+
+    single { provideUserRepository(get())}
+}
+val repositoryModuleRepositorySubmit= module {
+    fun provideUserRepository(api: GadsSubmitApi): RepositorySubmit {
+        return RepositorySubmit(api)
+    }
+
+    single { provideUserRepository(get())}
 }
     val netWork= module {
         fun provideCache(application: Application): Cache {
@@ -53,15 +78,13 @@ fun provideRetrofitService(retrofit: Retrofit):GadsApi{
                 .client(client)
                 .build()
         }
+
+
         single { provideHttpClient(get(),get()) }
         single { provideGson() }
         single { provideRetrofit(get(), get()) }
         single { provideCache(androidApplication()) }
     }
-val repositoryModule= module {
-    fun provideUserRepository(api: GadsApi): ApiRepository {
-        return ApiRepository(api)
-    }
-    single { provideUserRepository(get())}
-}
+
+
 

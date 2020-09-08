@@ -1,4 +1,4 @@
-package com.app.gadspractice.Network
+package com.app.gadspractice.network
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

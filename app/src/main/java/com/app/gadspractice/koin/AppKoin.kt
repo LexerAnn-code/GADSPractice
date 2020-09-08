@@ -1,7 +1,8 @@
-package com.app.gadspractice.Koin
+package com.app.gadspractice.koin
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
+
 import org.koin.core.context.startKoin
 
 class AppKoin:Application(){
@@ -12,8 +13,11 @@ class AppKoin:Application(){
 androidContext(this@AppKoin)
 modules(viewModelModule)
             modules(netWork)
-            modules(retrofitServiceModule)
-            modules(repositoryModule)
+            modules(repositoryModuleApiRepository)
+            modules(repositoryModuleRepositorySubmit)
+            modules(repositoryModules)
+            modules(repositoryModuleSubmit)
+
         }
     }
 }
